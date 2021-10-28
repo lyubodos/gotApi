@@ -34,7 +34,19 @@ const addHero = (req, res, next) => {
 };
 
 
+const deleteHero = (req, res, next) => {
+    const exId = req.params.id;
+
+    Hero.findByIdAndDelete(exId)
+    .then(result => {
+        res.json(result);
+        console.log(`${result.name} has been deleted!`);
+    })
+    .catch(err => res.status(400).json(err));
+};
+
 module.exports = {
     getHeroes,
-    addHero
+    addHero,
+    deleteHero
 }
