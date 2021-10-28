@@ -19,6 +19,7 @@ const addHero = (req, res, next) => {
     const heroName = req.body.name;
     const heroAge = req.body.age;
     const heroHouse = req.body.house;
+    const heroStrength = req.body.strength;
     const heroStamina = req.body.stamina;
     const heroAgility = req.body.agility;
     const heroIntellect = req.body.intellect;
@@ -28,6 +29,7 @@ const addHero = (req, res, next) => {
         name: heroName,
         age: heroAge,
         house: heroHouse,
+        strength: heroStrength,
         stamina: heroStamina,
         agility: heroAgility,
         intellect: heroIntellect
