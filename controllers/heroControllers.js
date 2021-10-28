@@ -2,10 +2,16 @@ const Hero = require("../models/Hero");
 
 
 const getHeroes = (req, res, next) => {
-    
+
     Hero.find()
-        .then(heroes => res.json(heroes))
-        .catch(err => res.status(400).json(err));
+        .then(heroes => {
+            if (heroes.length > 0) {
+                res.json(heroes)
+        }else{
+            res.json("Database is empty!")
+        }
+    })
+        .catch (err => res.status(400).json(err));
 };
 
 
@@ -19,12 +25,13 @@ const addHero = (req, res, next) => {
 
 
     const hero = new Hero({
-        name: heroName, 
-        age: heroAge, 
-        house: heroHouse, 
-        stamina: heroStamina, 
-        agility: heroAgility, 
-        intellect: heroIntellect});
+        name: heroName,
+        age: heroAge,
+        house: heroHouse,
+        stamina: heroStamina,
+        agility: heroAgility,
+        intellect: heroIntellect
+    });
 
     hero.save()
         .then(result => {
@@ -38,11 +45,11 @@ const deleteHero = (req, res, next) => {
     const exId = req.params.id;
 
     Hero.findByIdAndDelete(exId)
-    .then(result => {
-        res.json(result);
-        console.log(`${result.name} has been deleted!`);
-    })
-    .catch(err => res.status(400).json(err));
+        .then(result => {
+            res.json(result);
+            console.log(`${result.name} has been deleted!`);
+        })
+        .catch(err => res.status(400).json(err));
 };
 
 module.exports = {
