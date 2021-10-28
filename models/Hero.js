@@ -26,6 +26,12 @@ const heroSChema = new Schema({
         required: true
     },
 
+    strength: {
+        type: Number,
+        allowNull: false,
+        required: true
+    },
+
     stamina: {
         type: Number,
         allowNull: false,
