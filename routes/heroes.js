@@ -7,6 +7,8 @@ router.get("/", heroController.getHeroes);
 
 router.post("/add", heroController.addHero);
 
+router.delete("/:id", heroController.deleteHero);
+
 
 
 
