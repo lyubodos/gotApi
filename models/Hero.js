@@ -13,6 +13,11 @@ const heroSChema = new Schema({
        
     },
 
+    imageUrl: {
+        type: String,
+        required: true
+    },
+
     age: {
         type: Number,
         allowNull: false,
