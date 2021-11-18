@@ -1,6 +1,5 @@
 const Hero = require("../models/Hero");
 
-
 const getHeroes = (req, res, next) => {
 
     Hero.find()
@@ -15,8 +14,20 @@ const getHeroes = (req, res, next) => {
 };
 
 
+const getHero = (req, res, next) => {
+    const heroId = req.params.id;
+
+    Hero.findById(heroId)
+    .then(hero => {
+        res.json(hero);
+    })
+    .catch (err => res.status(400).json(err));
+}
+
+
 const addHero = (req, res, next) => {
     const heroName = req.body.name;
+    const heroImage = req.body.imageUrl;
     const heroAge = req.body.age;
     const heroHouse = req.body.house;
     const heroStrength = req.body.strength;
@@ -27,6 +38,7 @@ const addHero = (req, res, next) => {
 
     const hero = new Hero({
         name: heroName,
+        imageUrl: heroImage,
         age: heroAge,
         house: heroHouse,
         strength: heroStrength,
@@ -45,34 +57,27 @@ const addHero = (req, res, next) => {
 const editHero = (req, res, next) => {
     const exId = req.params.id;
 
-    const heroName = req.body.name;
-    const heroAge = req.body.age;
-    const heroHouse = req.body.house;
-    const heroStrength = req.body.strength;
-    const heroStamina = req.body.stamina;
-    const heroAgility = req.body.agility;
-    const heroIntellect = req.body.intellect;
+    const hero = {
+        name: req.body.name,
+        imageUrl: req.body.imageUrl,
+        age: req.body.age,
+        house: req.body.house,
+        strength: req.body.strength,
+        stamina: req.body.stamina,
+        agility: req.body.agility,
+        intellect: req.body.intellect
+    }
 
-    Hero.findById(exId)
+    Hero.findByIdAndUpdate(exId, hero)
         .then(hero => {
-            hero.name = heroName;
-            hero.age = heroAge;
-            hero.house = heroHouse;
-            hero.strength = heroStrength;
-            hero.stamina = heroStamina;
-            hero.agility = heroAgility;
-            hero.intellect= heroIntellect;
-
-            hero.save()
-            .then(result => res.json(result))
+           res.json(`${hero.name} has been updated!`)
         })
         .catch(err => res.status(400).json(err));
-}
+};
 
 const deleteHero = (req, res, next) => {
     const exId = req.params.id;
     
-
     Hero.findById(exId)
         .then(result => {
             res.json(result);
@@ -82,6 +87,7 @@ const deleteHero = (req, res, next) => {
 };
 
 module.exports = {
+    getHero,
     getHeroes,
     addHero,
     editHero,
