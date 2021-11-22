@@ -27,6 +27,8 @@ const getHero = (req, res, next) => {
 
 const addHero = (req, res, next) => {
     const heroName = req.body.name;
+    const alliasName = req.body.allias;
+    const description = req.body.description;
     const heroImage = req.body.imageUrl;
     const heroAge = req.body.age;
     const heroHouse = req.body.house;
@@ -38,6 +40,8 @@ const addHero = (req, res, next) => {
 
     const hero = new Hero({
         name: heroName,
+        allias: alliasName,
+        description: description,
         imageUrl: heroImage,
         age: heroAge,
         house: heroHouse,
@@ -59,6 +63,8 @@ const editHero = (req, res, next) => {
 
     const hero = {
         name: req.body.name,
+        allias: req.body.allias,
+        description: req.body.description,
         imageUrl: req.body.imageUrl,
         age: req.body.age,
         house: req.body.house,
@@ -85,6 +91,7 @@ const deleteHero = (req, res, next) => {
         })
         .catch(err => res.status(400).json(err));
 };
+
 
 module.exports = {
     getHero,

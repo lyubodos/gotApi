@@ -17,6 +17,7 @@ mongoose.connect(uri, { useNewUrlParser: true});
 
 const connection = mongoose.connection;
 
+
 connection.once("open", ()=> {
     console.log("Server is connected to the GoT MongoDB");
 });
