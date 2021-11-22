@@ -13,6 +13,18 @@ const heroSChema = new Schema({
        
     },
 
+    allias: {
+        type: String,
+        allowNull: false,
+        required: true
+    },
+
+    description: {
+        type: String,
+        allowNull: false,
+        required: true
+    },
+
     imageUrl: {
         type: String,
         required: true
